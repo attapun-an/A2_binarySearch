@@ -29,6 +29,7 @@ def binary_search_002(num_list, lookupValue):
     UB = len(num_list)-1
     while not found and not searchFailed:
         MP = int(LB+UB/2)
+        # ahhhh, that's where it went wrong - order of operations.
         if num_list[MP] == lookupValue:
             found = True
         else:
@@ -40,9 +41,26 @@ def binary_search_002(num_list, lookupValue):
                 else:
                     MP += 1
 
-def binary_search_003
+def binary_search_003(num_list, searchItem):
+    found = False
+    searchFailed = False
+    lowerBoundry = 0
+    upperBoundry = len(num_list)-1
+    while not found and not searchFailed:
+        middle = int((lowerBoundry+upperBoundry)/2)
+        if num_list[middle] == searchItem:
+            found = True
+        else:
+            if lowerBoundry >= upperBoundry: # no search area left
+                searchFailed = True
+            else:
+                if num_list[middle] > searchItem:
+                    upperBoundry = middle-1
+                else:
+                    lowerBoundry = middle+1
+    return found
 
 
 # first test
-found = binary_search_002(testList001, 4)
+found = binary_search_003(testList001, 5)
 print(found)
